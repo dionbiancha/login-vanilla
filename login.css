@@ -99,8 +99,10 @@ button {
   display: flex;
   justify-content: center;
   color: red;
+  font-weight: 700;
   text-transform: uppercase;
-}
-.notification-invalid {
-  color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 20px;
 }

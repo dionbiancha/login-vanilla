@@ -1,32 +1,40 @@
-//import fakeFetchApi from "./utils/fakeFetchApi.js";
+import fakeFetchApi from "./utils/fakeFetchApi.js";
 
 //Chama a API caso esteja nos padroes
-async function handleChange() {
-  if (checarEmail() && checarSenha()) {
-    console.log("Logando");
+async function handleSubmit(event) {
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  event.preventDefault();
 
-    const data = {
-      email: document.forms[0].email.value,
-      password: document.forms[0].password.value,
-    };
+  const data = {
+    email: email.value,
+    password: password.value,
+  };
 
-    const response = fakeFetchApi(data);
-    console.log("Dados", data);
+  if (!checarEmail() || !checarSenha()) {
+    return;
+  }
 
-    if (responseFakeApi.status === 200) {
-      window.location.href = "/app";
-    } else {
-      gerarNotificacao(responseFakeApi.message, "notification-error", true);
-    }
+  const { message, status } = fakeFetchApi(data);
+
+  if (status === 401) {
+    gerarNotificacao(message, "notification-error", true);
+  } else {
+    window.location.href = "/app";
   }
 }
 
-//Gera a notificação com timer
+//Gera a notificação com setTimeout
 function gerarNotificacao(message, nameElement, delay = true) {
   document.getElementById(nameElement).innerText = message;
   if (delay) {
-    setTimeout(clearNotification, 2 * 1000, nameElement);
+    setTimeout(limparNotificacao, 2000, nameElement);
   }
+}
+
+//Limpa a notificação
+function limparNotificacao(nameElement) {
+  document.getElementById(nameElement).innerHTML = null;
 }
 
 //Verifica se o email esta nos padõres
@@ -64,9 +72,4 @@ function checarSenha() {
   }
 }
 
-//Desabilita a msg de erro
-function changeColor(id) {
-  document.getElementById(id).style.cssText = "border: 0px ";
-  document.getElementById("errorEmail").style.cssText = "display: none ";
-  document.getElementById("errorPassword").style.cssText = "display: none ";
-}
+form.addEventListener("submit", handleSubmit);

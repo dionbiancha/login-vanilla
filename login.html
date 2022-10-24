@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <link rel="stylesheet" type="text/css" href="login.css" media="screen" />
-  <script type="text/javascript" src="login.js"></script>
-  <script type="module" src="utils/fakeFetchApi.js"></script>
   <head>
     <title>Sistema de login</title>
-
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
       rel="stylesheet"
@@ -21,31 +18,36 @@
       <div class="shape"></div>
       <div class="shape"></div>
     </div>
-    <form name="form">
-      <div id="notification-error" class="notification-error"></div>
+    <form action="" id="form" name="form">
       <h3>Login Here</h3>
-
       <label for="username">Username</label>
       <input
         name="email"
         type="text"
         placeholder="Email"
         id="email"
-        onclick="changeColor('email')"
+        onclick="changeColor('email', 'errorEmail')"
       />
       <p class="error" id="errorEmail">Email incoreto</p>
-
       <label for="password">Password</label>
       <input
         name="password"
         type="password"
         placeholder="Password"
         id="password"
-        onclick="changeColor('password')"
+        onclick="changeColor('password', 'errorPassword')"
       />
       <p class="error" id="errorPassword">Senha fraca</p>
 
-      <button type="button" onclick="handleChange()">Log In</button>
+      <button type="submit">Log In</button>
     </form>
+    <div id="notification-error" class="notification-error"></div>
+    <script type="text/javascript">
+      function changeColor(input, text) {
+        document.getElementById(input).style.cssText = "border: 0px ";
+        document.getElementById(text).style.cssText = "display: none ";
+      }
+    </script>
+    <script type="module" src="login.js"></script>
   </body>
 </html>
