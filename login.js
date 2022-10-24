@@ -20,7 +20,7 @@ async function handleSubmit(event) {
   if (status === 401) {
     gerarNotificacao(message, "notification-error", true);
   } else {
-    window.location.href = "/app";
+    alert("Logado com sucesso Aleluia irmão ouvi um Amém?");
   }
 }
 
